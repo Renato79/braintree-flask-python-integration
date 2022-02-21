@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Braintree Test Checkout{% endblock %}
+{% block body %}
+
+
+<!-- TRANSACTION -->
+<table class="table_tr_show">
+  <caption>Transaction</caption>
+    <tr>
+      <td class="td-tr_show1">ID</td>
+      <td class="td-tr_show2">{{ transaction.id }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Network Tr. ID</td>
+      <td class="td-tr_show2">{{ transaction.network_transaction_id }}</td>
+    </tr>    
+    <tr>
+      <td class="td-tr_show1">Type</td>
+      <td class="td-tr_show2">{{ transaction.type.capitalize() }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Response code</td>
+      <td class="td-tr_show2">{{ transaction.processor_response_code }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Response text</td>
+      <td class="td-tr_show2">
+        {% if 'gateway' in transaction.status %}
+          {{ transaction.gateway_rejection_reason.capitalize() }}
+        {% else %}
+          {{ transaction.processor_response_text }}
+        {% endif %}  
+      </td>
+    </tr>    
+    <tr>
+      <td class="td-tr_show1">Amount</td>
+      <td class="td-tr_show2">{{ transaction.currency_iso_code }} {{ transaction.amount }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Status</td>
+      <td class="td-tr_show2">{{ transaction.status }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Created at</td>
+      <td class="td-tr_show2">{{ transaction.created_at.strftime("%d/%m/%Y %H:%M:%S") }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Last update</td>
+      <td class="td-tr_show2">{{ transaction.updated_at.strftime("%d/%m/%Y %H:%M:%S") }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Actions:</td>
+      <td class="td-tr_show2">
+        {% if transaction.refund_id == None %}
+          {% if transaction.status == 'settled' or transaction.status == 'settling' %}
+            <a href="{{ url_for('tr_refund', transaction_id=transaction.id) }}">Refund</a>
+          {% elif transaction.status == 'authorized' or transaction.status == 'submitted_for_settlement' or transaction.status == 'settlement_pending' %}
+            <a href="{{ url_for('tr_void', transaction_id=transaction.id) }}">Void</a>
+          {% elif transaction.status == 'voided' %}
+            Voided
+          {% elif 'rejected' in transaction.status %}
+            Rejected
+          {% elif 'declined' in transaction.status %}
+            Declined
+          {% endif %}          
+        {% elif transaction.refund_id != None %}
+          Refunded
+        {% endif %}        
+      </td>
+    </tr>
+    {% if transaction.refund_id != None %}
+    <tr>
+      <td class="td-tr_show1">Refund ID</td>
+      <td class="td-tr_show2">{{ transaction.refund_id }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+
+<!-- PAYMENT -->
+<table class="table_tr_show">
+  <caption>Payment</caption>
+  <tr>
+    <td class="td-tr_show1">Token</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.token }}</td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">First 6 digits</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.bin }}</td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">Last 4 digits</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.last_4 }}</td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">Payment type</td>
+    <td class="td-tr_show2">{{ transaction.payment_instrument_type.replace("_", " ").title() }}</td>
+  </tr>  
+  <tr>
+    <td class="td-tr_show1">Card type</td>
+    <td class="td-tr_show2"><img class="img-align" src="{{ transaction.credit_card_details.image_url }}" alt="{{ transaction.credit_card_details.card_type }}"></td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">Expiration date</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.expiration_date }}</td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">Issuing bank</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.issuing_bank }}</td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">Cardholder name</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.cardholder_name }}</td>
+  </tr>
+  <tr>
+    <td class="td-tr_show1">Customer location</td>
+    <td class="td-tr_show2">{{ transaction.credit_card_details.customer_location }}</td>
+  </tr>
+</table>
+
+<!-- MERCHANT -->
+<table class="table_tr_show">
+  <caption>Merchant</caption>
+    <tr>
+      <td class="td-tr_show1">Merchant</td>
+      <td class="td-tr_show2">{{ transaction.merchant_account_id.capitalize() }}</td>
+    </tr>
+    <tr>
+      <td class="td-tr_show1">Merchant location</td>
+      <td class="td-tr_show2">{{ transaction.merchant_address.locality }}</td>
+    </tr>
+</table>
+
+
+{% endblock %}

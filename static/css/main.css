@@ -1,0 +1,212 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    line-height: 1.875;
+    font-weight: 400;
+    color: #313131;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* base.html start */
+nav {
+    width: 85rem;
+    margin: 0 auto 0;
+    /* margin: auto;*/
+    text-align: right;
+}
+nav ul {
+    list-style-type: none;
+    text-decoration: none;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 1rem;
+    color: #222D65;
+}
+
+nav li a:visited {
+    color: #222D65;
+}
+
+nav li a:hover {
+    color: #0093d5;
+}
+/* base.html end */
+
+
+
+
+/* tr_list.html start */
+.centered {
+    margin: auto;
+}
+
+.tabsize {
+    margin-top: 2rem;
+    width: 85rem;
+}
+
+.tdid {
+    width: 8rem;
+}
+
+.tdres {
+    width: 16rem;
+}
+/* tr_list.html end */
+
+
+
+
+/* tr_new.html start */
+.new_tr_container {
+    width: 50rem;
+    margin: auto;
+    text-align: center;
+}
+
+button {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #555555;
+    color: white;
+  }
+
+/* Hide arrows from input number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 8px;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  padding: 8px;
+}
+/* tr_new.html end */
+
+
+
+
+
+/* tr_show.html start */
+.img-align {
+    display: block;
+    align-content: center;
+    margin: auto;
+}
+
+.table_tr_show {
+    margin: 2rem auto 2rem;
+    width: 40rem;
+}
+
+.table_tr_show > caption {
+    font-size: 1.5rem;
+    color:#222D65;
+}
+
+.td-tr_show1 {
+    width: 25%;
+} 
+
+.td-tr_show2 {
+    width: 75%;
+} 
+/* tr_show.html end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* NEW TRANSACTION */
+
+
+
+
+
+
+/* Table generic rule style */
+table {
+    border-collapse: collapse;
+}
+
+table td,
+table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #222D65;
+    color: white;
+}
+
+caption {
+    display: table-caption;
+    text-align: center;
+}
+
+.float_left {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
+
+
+
+footer {
+    width: 100%;
+    margin-top: 20rem;
+    text-align: center;
+}
