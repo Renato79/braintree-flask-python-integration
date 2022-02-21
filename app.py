@@ -95,5 +95,7 @@ def tr_void(transaction_id):
 
 
 
-if __name__ == "__main__":
-    app.run(host="localhost", port=int("5000"))
+if __name__ =="__main__":
+    app.run(host=os.getenv("IP"),
+       port=int(os.getenv("PORT")),
+       debug=True)
