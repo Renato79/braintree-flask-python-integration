@@ -36,24 +36,37 @@
     <td class="tdid">
       {% if item.refund_id == None %}
         {% if item.status == 'settled' or item.status == 'settling' %}
+          <!-- Refund -->
           {% if item.refunded_transaction_id == None %}
             <a href="{{ url_for('tr_refund', transaction_id=item.id) }}">Refund</a>
+          <!-- or Refunded -->  
           {% else %}
             Refunded
           {% endif %}
         {% elif item.status == 'authorized' or item.status == 'submitted_for_settlement' or item.status == 'settlement_pending' %}
-          <a href="{{ url_for('tr_void', transaction_id=item.id) }}">Void</a>
+          <!-- Void -->
+          {% if item.refunded_transaction_id == None %}
+            <a href="{{ url_for('tr_void', transaction_id=item.id) }}">Void</a>
+          <!-- or Void Refund -->  
+          {% else %}
+            <a href="{{ url_for('tr_void', transaction_id=item.id) }}">Void Refund</a>
+          {% endif %}
         {% elif item.status == 'voided' %}
+          <!-- Voided -->
           {% if item.refunded_transaction_id == None %}
             <p>Voided</p>
+          <!-- or Refund Voided -->  
           {% else %}
             <p>Refund Voided</p>
           {% endif %}
+        <!-- Rejected -->  
         {% elif 'rejected' in item.status %}
           <p>Rejected</p>
+        <!-- Declined -->  
         {% elif 'declined' in item.status %}
           <p>Declined</p>
         {% endif %}
+      <!-- Refunded -->  
       {% elif item.refund_id != None and item.refunded_transaction_id == None %}
         Refunded
       {% endif %}   
