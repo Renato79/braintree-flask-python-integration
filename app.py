@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, flash
+from flask import Flask, redirect, url_for, render_template, request
 
 import braintree
 from gateway import *
@@ -38,7 +38,7 @@ def create_checkout():
         return redirect(url_for('tr_show',transaction_id=result.transaction.id))
     else:
         for x in result.errors.deep_errors: 
-            flash(f'Error: {x.code}: {x.message}')
+            print(f'Error: {x.code}: {x.message}')
         return redirect(url_for('tr_new'))
 
 
