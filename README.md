@@ -40,7 +40,7 @@ Braintree is a PayPal Service and a full-stack payments platform that makes it e
 - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 
 ### Frameworks and Libraries
-- [Flask](https://palletsprojects.com/p/flask/)
+- [Flask Framework](https://palletsprojects.com/p/flask/)
 - [BrainTree - Python SDK](https://developer.paypal.com/braintree/docs/start/hello-server/python)
 - [BrainTree - Server-Side API Requests](https://developer.paypal.com/braintree/docs/reference/response/transaction)
 
